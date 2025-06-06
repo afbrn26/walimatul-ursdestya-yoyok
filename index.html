@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan Destya & Yoyok</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css  ">
+  <link rel="preconnect" href="https://fonts.googleapis.com  ">
+  <link rel="preconnect" href="https://fonts.gstatic.com  " crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Serif&family=Tangerine&display=swap " rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplycountdown.js/dist/simplyCountdown.min.css ">
+  <script src="https://cdn.jsdelivr.net/npm/simplycountdown.js "></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js "></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css ">
+  <style>
+    /* Tambahkan ini untuk membuat tampilan selalu seperti HP */
+    .container {
+      width: 100%;
+      max-width: 400px;
+      min-height: 100vh;
+      margin: auto;
+      overflow: hidden;
+      padding: 0 10px;
+      background: url('bg.jpg') no-repeat center center;
+      background-size: cover;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    img,
+    video {
+      max-width: 100%; /* Membuat elemen menyesuaikan lebar kontainer */
+      height: auto; /* Menjaga aspek rasio */
+    }
+    /* CSS dari file asli kamu mulai dari sini (tanpa perubahan) */
+    html, body {
+      scroll-behavior: smooth;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tangerine';
+      background-size: cover;
+      color: #333; 
+      overflow: auto;
+    }
+    body::before {
+      content: "";
+      display: block;
+      height: 1px;
+      margin: -1px 0 0;
+      visibility: hidden;
+    }
+    .parallax {
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .section {
+      min-height: 100vh;
+      max-width: 400px;
+      height: auto;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 40px;
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    /* Styling untuk form konfirmasi kehadiran */
+#guest-form {
+  width: 90%;
+  max-width: 360px; /* Sesuaikan dengan lebar maksimum container */
+  margin: 0 auto 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Jarak antar elemen */
+}
+#guest-form input,
+#guest-form textarea,
+#guest-form select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #333;
+}
+#guest-form button {
+  background-color: #c19a6b;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#guest-form button:hover {
+  background-color: #a97f5e;
+}
+@media (max-width: 768px) {
+  #guest-form {
+    width: 90%; /* Atur lebar untuk perangkat seluler */
+  }
+}
+    h1, h2, h3 {
+      margin: 10px 0;
+    }
+    .landing-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      background: transparent;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+      min-height: 100vh;
+    }
+    .fade-in-image {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .fade-in-image.loaded {
+      opacity: 1;
+    }
+    .invitation-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .landing-wrapper h2 {
+      font-family: 'Playfair Display', serif;
+      margin: 5px 0;
+    }
+    .landing-wrapper h3 {
+      font-family: 'Tangerine', cursive;
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+    .landing-wrapper p {
+      font-family: 'Playfair Display', serif;
+      margin: 10px 0;
+    }
+    .landing-wrapper h4 {
+      font-family: 'Tangerine', cursive;
+      font-size: 2.5rem;
+      margin: 5px 0;
+    }
+    .landing-wrapper h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+    .landing-wrapper img[src="arab.png"] {
+      max-width: 280px;
+      height: auto;
+      margin: 5px 0;
+      border-radius: 10px;
+    }
+    #mainContent .section h1 {
+      margin: 0;
+      padding: 0;
+      font-family: 'Tangerine', cursive;
+      font-size: 3rem !important;
+      color: #a0906a;
+      font-weight: normal;
+      line-height: 1.2;
+    }
+    #mainContent .section h3 {
+      margin: 5px 0;
+      padding: 0;
+      color: #a0906a;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: normal;
+      line-height: 1.4;
+      transform: translateY(80px);
+    }
+    #mainContent .section h2 {
+      margin: 5px 0;
+      padding: 0;
+      color: #333;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: normal;
+      line-height: 1.4;
+      transform: translateY(-50px);
+    }
+    #mainContent .section p {
+      margin: 5px 0;
+      padding: 0;
+      color: #333;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: normal;
+      line-height: 1.4;
+      transform: translateY(50px);
+    }
+    .highlight-day {
+      font-size: 2rem;
+      color: #a0906a;
+      font-weight: normal;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 30px;
+      font-family: 'Tangerine', cursive;
+      background: #c19a6b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #a97f5e;
+    }
+    .profil-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin: 30px auto;
+      max-width: 800px;
+      text-align: center;
+    }
+    .bride, .groom {
+      width: 45%;
+    }
+    .bride p, .groom p {
+      text-align: center;
+    }
+    .bride h3, .groom h3 {
+      text-align: center;
+    }
+    .save-date {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .arabic {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    iframe {
+      width: 100%;
+      max-width: 400px; /* Sesuaikan dengan lebar kontainer */
+      height: 300px;
+      border: none;
+    }
+    input, textarea, select {
+      width: 80%;
+      margin: 10px auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: block;
+    }
+    .gift {
+      background: #fff0e5;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    .copy-btn {
+      cursor: pointer;
+      color: #c19a6b;
+    }
+    .fp-nav {
+      display: none !important;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      .section {
+        padding: 50px 20px;
+        min-height: 100vh;
+        max-width: 400px;
+      }
+      .section h1 {
+        font-size: 3rem;
+      }
+      .section h2, .section h3 {
+        font-size: 1rem;
+      }
+      button {
+        font-size: 20px;
+        padding: 8px 16px;
+      }
+      .bride, .groom {
+        margin: 20px 0;
+      }
+      .bride img,
+      .groom img {
+        max-width: 120px;
+        border-radius: 50%;
+      }
+      .bride h3,
+      .groom h3 {
+        font-size: 1.2rem;
+      }
+      .section iframe {
+        height: 200px;
+        width: 100%;
+      }
+      footer {
+        font-size: 0.9rem;
+        padding: 20px;
+      }
+      .landing-wrapper img {
+        max-width: 180px;
+      }
+      #guest-name {
+        font-size: 1.2rem;
+      }
+      button[type="button"] {
+        font-size: 1rem;
+        padding: 10px 16px;
+      }
+    }
+    .hero-image {
+      margin-top: 20px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    @media (max-width: 768px) {
+      .hero-image {
+        width: 90%;
+        margin: 40px auto;
+      }
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px; /* Kurangi padding untuk perangkat seluler */
+      }
+      iframe {
+        height: 200px; /* Atur tinggi iframe lebih rendah untuk perangkat seluler */
+      }
+    }
+    /* Styling untuk countdown timer */
+    #countdown-container {
+      margin-top: 20px;
+      width: 100%; /* Mengikuti lebar kontainer */
+      max-width: 298px; /* Sesuaikan dengan lebar video */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      background-color: #b4a396;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    #countdown span {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #a0906a;
+    }
+    /* Styling untuk tombol lokasi */
+    #location-button {
+      margin-top: 20px;
+      width: 100%; /* Mengikuti lebar kontainer */
+      max-width: 298px; /* Sesuaikan dengan lebar video */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none; /* Hilangkan garis bawah */
+      color: inherit; /* Warisi warna dari parent */
+      cursor: pointer; /* Ganti menjadi pointer saat dihover */
+      background-color: #b4a396;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px; /* Menambahkan efek pointer saat dihover */
+    }
+    #location-button span {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #555;
+    }
+    /* Styling untuk kotak section */
+    .box-section {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    /* Background foto */
+    .form-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      border-radius: 10px;
+    }
+    /* Overlay form di atas foto */
+    .form-overlay {
+      position: relative;
+      z-index: 2; /* Agar form berada di atas foto */
+      padding: 190px 80px;
+      border-radius: 10px;
+    }
+    /* Styling untuk form konfirmasi kehadiran */
+    .guest-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .guest-form input,
+    .guest-form textarea,
+    .guest-form select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-family: 'Playfair Display', serif;
+      color: #333;
+      transition: border-color 0.3s ease;
+    }
+    .guest-form button {
+    background-color: #c19a6b;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    font-family: 'Tangerine', cursive;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .guest-form button:hover {
+  background-color: #a97f5e;
+  }
+  #response-message {
+    color: #28a745;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-top: 10px;
+  }
+  /* Styling khusus untuk h3 di Section 5 */
+.section:nth-child(5) h3 {
+  transform: translateY(-70px);
+  font-size: 1.3rem;
+  color: #8b5e3c;
+}
+/* Styling tombol custom */
+.custom-button {
+  display: inline-block;
+  padding: 12px 20px;
+  margin-top: 20px;
+  background-color: #c19a6b;
+  color: white !important;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: 'Tangerine', cursive;
+  font-weight: normal;
+  transition: background-color 0.3s ease;
+}
+.custom-button:hover {
+  background-color: #a97f5e;
+}
+  </style>
+</head>
+<body>
+<!-- CONTAINER WRAPPER -->
+<div class="container">
+  <div class="landing-wrapper" id="landing">
+    <div class="invitation-header">
+      <h2>Walimatul 'Urs</h2>
+      <img src="arab.png" alt="Hands Holding" class="responsive-image" />
+    </div>
+    <p>Kepada Bapak/Ibu/Saudara/i</p>
+    <h1 id="guest-name">Tamu Undangan yang Terhormat</h1>
+    <button onclick="openInvitation()">Buka Undangan</button>
+  </div>
+  <div id="mainContent" class="hidden">
+    <div id="fullpage">
+      <!-- Section 1 -->
+      <div class="section" data-anchor="walimatul">
+        <div class="invitation-box">
+          <video src="a.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+        </div>
+      </div>
+      <!-- Section 2 -->
+      <div class="section">
+        <div class="verse-box fadeIn">
+          <video src="b.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+        </div>
+      </div>
+      <!-- Section 3 -->
+      <div class="section">
+        <div class="invitation-box">
+          <video src="c.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+        </div>
+        <div id="countdown-container">
+          <span id="days">0</span> Hari
+          <span id="hours">0</span> Jam
+          <span id="minutes">0</span> Menit
+          <span id="seconds">0</span> Detik
+        </div>
+      </div>
+      <!-- Section 3-1 -->
+      <div class="section">
+        <div class="invitation-box">
+          <video src="c1.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+        </div>
+      </div>
+      <!-- Section 3-2 -->
+      <div class="section">
+        <div class="invitation-box">
+          <video src="c2.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+        </div>
+      </div>
+      <!-- Section 4 -->
+      <div class="section">
+        <div class="invitation-box">
+          <video src="d.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+        </div>
+          <a href="https://maps.app.goo.gl/KBmvjHVHysRFZjkm9"  target="_blank" id="location-button" class="countdown-container">
+            <span>Klik untuk Lihat Lokasi</span>
+          </a>
+      </div>
+      <!-- Section 5 -->
+      <div class="section">
+        <div class="box-section">
+          <img src="box.png" alt="Foto Pernikahan" class="form-background">
+          <div class="form-overlay">            
+            <form id="guest-form" class="guest-form">
+            <a href="konfirmasi.html" target="_blank" class="custom-button">Isi Konfirmasi Kehadiran & Ucapan</a>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+</div> <!-- Tutup container -->
+<script>
+  function openInvitation() {
+    document.getElementById('landing').classList.add('hidden');
+    const mainContent = document.getElementById('mainContent');
+    mainContent.classList.remove('hidden');
+    // Delay untuk memastikan DOM benar-benar siap
+    setTimeout(() => {
+      // Inisialisasi fullpage
+      new fullpage('#fullpage', {
+        autoScrolling: true,
+        fitToSection: true,
+        fitToSectionDelay: 500,
+        scrollBar: false,
+        navigation: false,
+        backgroundColor: 'transparent',
+        anchors: ['walimatul', 'ayat', 'profil', 'lokasi', 'kehadiran', 'hadiah'],
+        afterLoad: function(origin, destination, direction) {
+          // Opsional: tambahkan animasi saat berganti section
+        }
+      });
+      // Scroll ke section pertama setelah inisialisasi
+      fullpage_api.moveTo('walimatul', 1); // Memastikan scroll ke section pertama
+    }, 100);
+  }
+
+  window.onbeforeunload = function () {
+    return "Anda yakin ingin meninggalkan halaman ini?";
+  };
+
+  // Countdown Timer
+  const countDownDate = new Date("June 21, 2025 08:00:00").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+  }, 1000);
+
+  simplyCountdown('#countdown', {
+    year: 2025,
+    month: 6,
+    day: 21
+  });
+
+  // Ambil nama tamu dari URL dan tampilkan
+  const urlParams = new URLSearchParams(window.location.search);
+  const namaTamu = urlParams.get('to');
+  if (namaTamu) {
+    document.getElementById('guest-name').innerText = decodeURIComponent(namaTamu);
+  }
+
+  // Fungsi untuk mengaktifkan animasi fadeIn untuk video
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.fade-in-image').forEach(el => el.classList.add('loaded'));
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.section').forEach(section => observer.observe(section));
+
+</script>
+</body>
+</html>
