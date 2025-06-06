@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konfirmasi Kehadiran - Destya & Yoyok</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Tangerine&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script> 
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #fffdf7;   
+      color: #333;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-family: 'Tangerine', cursive;
+      font-size: 2.5rem;
+      margin: 0 0 20px;
+      color: #a0906a;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      font-family: 'Playfair Display', serif;
+      color: #333;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #c19a6b;
+    }
+
+    button[type="submit"] {
+      background-color: #c19a6b;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-family: 'Tangerine', cursive;
+      font-size: 1.1rem;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #a97f5e;
+    }
+
+    /* Daftar ucapan tamu */
+    #guest-list p {
+      text-align: left;
+      background: #f9f9f9;
+      padding: 10px;
+      border-left: 4px solid #c19a6b;
+      margin: 10px 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* Tombol Titip Hadiah */
+    .gift-button {
+      display: inline-block;
+      margin: 30px 0 10px;
+      padding: 10px 20px;
+      background-color: #c19a6b;
+      color: white !important;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-family: 'Tangerine', cursive;
+      transition: background-color 0.3s ease;
+    }
+
+    .gift-button:hover {
+      background-color: #a97f5e;
+    }
+
+    /* Tombol kembali ke undangan */
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #c19a6b;
+      color: white !important;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-family: 'Tangerine', cursive;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #a97f5e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Konfirmasi Kehadiran</h2>
+
+    <form id="guest-form">
+      <input type="text" id="name" placeholder="Nama Lengkap" required />
+      <textarea id="message" rows="3" placeholder="Ucapan atau Pesan" required></textarea>
+      <select id="attendance" required>
+        <option value="">-- Konfirmasi Kehadiran --</option>
+        <option value="Hadir">Hadir</option>
+        <option value="Tidak Hadir">Tidak Hadir</option>
+      </select>
+      <button type="submit">Kirim Ucapan</button>
+      <div id="response-message" style="color:green; margin-top:10px;"></div>
+    </form>
+
+    <hr style="margin:30px 0;" />
+
+    <h3>Daftar Ucapan</h3>
+    <div id="guest-list"></div>
+
+    <!-- Tombol Titip Hadiah -->
+    <a href="hadiah.html" class="gift-button">🎁 Titip Hadiah</a>
+
+    <!-- Tombol Kembali -->
+    <br>
+    <a href="index.html" class="back-button">← Kembali ke Undangan</a>
+  </div>
+
+<script>
+  // Konfigurasi Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBGj7gPOB-d5b2XEKeKp414ZATWH5wlZUg",
+    authDomain: "wedding-8be82.firebaseapp.com",
+    databaseURL: "https://wedding-8be82-default-rtdb.asia-southeast1.firebasedatabase.app", 
+    projectId: "wedding-8be82",
+    storageBucket: "wedding-8be82.firebasestorage.app",
+    messagingSenderId: "573251406940",
+    appId: "1:573251406940:web:11cf79a1220da23e916a99"
+  };
+
+  // Inisialisasi Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  // Fungsi untuk mengirim ucapan ke Firebase
+  document.getElementById('guest-form')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const attendance = document.getElementById('attendance').value;
+
+    if (!name || !message || !attendance) {
+      alert("Harap lengkapi semua kolom.");
+      return;
+    }
+
+    const guest = { 
+      name, 
+      message, 
+      attendance,
+      time: new Date().toLocaleString()
+    };
+
+    // Simpan ke Firebase
+    database.ref('guests/').push(guest)
+      .then(() => {
+        this.reset();
+        const responseMessage = document.getElementById('response-message');
+        responseMessage.textContent = "Terima kasih! Ucapan Anda telah terkirim.";
+        setTimeout(() => {
+          responseMessage.textContent = "";
+        }, 5000);
+      })
+      .catch(error => {
+        alert("Maaf, gagal mengirim ucapan. Silakan coba lagi.");
+        console.error("Error writing to Firebase:", error);
+      });
+  });
+
+  // Fungsi untuk memuat daftar ucapan dari Firebase
+function loadGuestList() {
+  const guestList = document.getElementById('guest-list');
+  const guestsRef = database.ref('guests/');
+  
+  guestsRef.on('value', snapshot => {
+    guestList.innerHTML = "";
+    const guests = snapshot.val();
+
+    if (!guests) {
+      const emptyMsg = document.createElement("p");
+      emptyMsg.textContent = "Belum ada ucapan.";
+      guestList.appendChild(emptyMsg);
+      return;
+    }
+
+    Object.values(guests).forEach(guest => {
+      const entry = document.createElement("p");
+      entry.innerHTML = `<strong>${guest.name}</strong> (${guest.attendance})<br><small>${guest.time}</small><br>${guest.message}`;
+      guestList.appendChild(entry);
+    });
+  }, error => {
+    console.error("Database read error:", error);
+    guestList.innerHTML = "<p>Gagal memuat ucapan.</p>";
+  });
+}
+
+  // Muat ucapan saat halaman dimuat
+  window.addEventListener('DOMContentLoaded', loadGuestList);
+</script>
+</body>
+</html>
