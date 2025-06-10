@@ -561,9 +561,8 @@
     document.getElementById('landing').classList.add('hidden');
     const mainContent = document.getElementById('mainContent');
     mainContent.classList.remove('hidden');
-    // Delay untuk memastikan DOM benar-benar siap
+
     setTimeout(() => {
-      // Inisialisasi fullpage
       new fullpage('#fullpage', {
         autoScrolling: true,
         fitToSection: true,
@@ -573,17 +572,24 @@
         backgroundColor: 'transparent',
         anchors: ['walimatul', 'ayat', 'profil', 'lokasi', 'kehadiran', 'hadiah'],
         afterLoad: function(origin, destination, direction) {
-          // Opsional: tambahkan animasi saat berganti section
+          // Putar video di section aktif
+          const currentVideo = destination.item.querySelector('video');
+          if (currentVideo) {
+            currentVideo.play();
+          }
+        },
+        onLeave: function(origin, destination, direction) {
+          // Pause video di section sebelumnya
+          const leavingVideo = origin.item.querySelector('video');
+          if (leavingVideo) {
+            leavingVideo.pause();
+          }
         }
       });
-      // Scroll ke section pertama setelah inisialisasi
-      fullpage_api.moveTo('walimatul', 1); // Memastikan scroll ke section pertama
+
+      fullpage_api.moveTo('walimatul', 1);
     }, 100);
   }
-
-  window.onbeforeunload = function () {
-    return "Anda yakin ingin meninggalkan halaman ini?";
-  };
 
   // Countdown Timer
   const countDownDate = new Date("June 21, 2025 08:00:00").getTime();
@@ -606,14 +612,14 @@
     day: 21
   });
 
-  // Ambil nama tamu dari URL dan tampilkan
+  // Ambil nama tamu dari URL
   const urlParams = new URLSearchParams(window.location.search);
   const namaTamu = urlParams.get('to');
   if (namaTamu) {
     document.getElementById('guest-name').innerText = decodeURIComponent(namaTamu);
   }
 
-  // Fungsi untuk mengaktifkan animasi fadeIn untuk video
+  // Fade-in observer untuk gambar/video
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -623,7 +629,6 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.section').forEach(section => observer.observe(section));
-
 </script>
 </body>
 </html>
