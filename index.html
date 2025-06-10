@@ -501,19 +501,19 @@
       <!-- Section 1 -->
       <div class="section" data-anchor="walimatul">
         <div class="invitation-box">
-          <video src="a.webm" class="section-video fade-in-image" muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="a.webm" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 2 -->
       <div class="section">
         <div class="verse-box fadeIn">
-          <video src="b.webm" class="section-video fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="b.webm" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 3 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="c.webm" class="section-video fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="c.webm" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
         <div id="countdown-container">
           <span id="days">0</span> Hari
@@ -525,19 +525,19 @@
       <!-- Section 3-1 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="c1.webm" class="section-video fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="c1.webm" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 3-2 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="c2.webm" class="section-video fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="c2.webm" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 4 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="d.webm" class="section-video fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="d.webm" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
           <a href="https://maps.app.goo.gl/KBmvjHVHysRFZjkm9"  target="_blank" id="location-button" class="countdown-container">
             <span>Klik untuk Lihat Lokasi</span>
@@ -629,25 +629,6 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.section').forEach(section => observer.observe(section));
-
-    // Observer untuk deteksi apakah video muncul di layar
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const video = entry.target;
-      if (entry.isIntersecting) {
-        // Jika terlihat di layar, putar
-        video.play().catch(() => {});
-      } else {
-        // Jika keluar dari layar, pause
-        video.pause();
-      }
-    });
-  }, { threshold: 0.3 });
-
-  // Terapkan ke semua video berkelas 'section-video'
-  document.querySelectorAll('.section-video').forEach(video => {
-    videoObserver.observe(video);
-  });
 </script>
 </body>
 </html>
