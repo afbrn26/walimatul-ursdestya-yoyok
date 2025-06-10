@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walimatul 'Urs Destya & Yoyok</title>
+  <title>Undangan Pernikahan Destya & Yoyok</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css  ">
   <link rel="preconnect" href="https://fonts.googleapis.com  ">
   <link rel="preconnect" href="https://fonts.gstatic.com  " crossorigin>
@@ -122,7 +122,13 @@
       animation: fadeIn 1.5s ease-in-out;
       min-height: 100vh;
     }
+    .video-container {
+      position: relative;
+      z-index: 1;
+    }
     .fade-in-image {
+      position: relative;
+      z-index: 1;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
@@ -181,7 +187,6 @@
       font-size: 1rem;
       font-weight: normal;
       line-height: 1.4;
-      transform: translateY(80px);
     }
     #mainContent .section h2 {
       margin: 5px 0;
@@ -191,7 +196,6 @@
       font-size: 1rem;
       font-weight: normal;
       line-height: 1.4;
-      transform: translateY(-50px);
     }
     #mainContent .section p {
       margin: 5px 0;
@@ -201,7 +205,6 @@
       font-size: 1rem;
       font-weight: normal;
       line-height: 1.4;
-      transform: translateY(50px);
     }
     .highlight-day {
       font-size: 2rem;
@@ -461,7 +464,6 @@
   }
   /* Styling khusus untuk h3 di Section 5 */
 .section:nth-child(5) h3 {
-  transform: translateY(-70px);
   font-size: 1.3rem;
   color: #8b5e3c;
 }
@@ -482,6 +484,27 @@
 .custom-button:hover {
   background-color: #a97f5e;
 }
+
+#volume-control {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+#volume-control:hover {
+  transform: scale(1.1);
+}
+
+#volume-control i {
+  font-size: 20px;
+  color: #c19a6b;
+}
   </style>
 </head>
 <body>
@@ -501,19 +524,19 @@
       <!-- Section 1 -->
       <div class="section" data-anchor="walimatul">
         <div class="invitation-box">
-          <video src="aa.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="aa.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 2 -->
       <div class="section">
         <div class="verse-box fadeIn">
-          <video src="bb.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="bb.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 3 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="cc.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="cc.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
         <div id="countdown-container">
           <div>Acara Dimulai: <br>
@@ -527,19 +550,19 @@
       <!-- Section 3-1 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="cc1.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="cc1.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 3-2 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="cc2.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="cc2.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 4 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="dd.mp4" class="fade-in-image" autoplay loop muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="dd.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
           <a href="https://maps.app.goo.gl/KBmvjHVHysRFZjkm9"  target="_blank" id="location-button" class="countdown-container">
             <span>Klik untuk Lihat Lokasi</span>
@@ -557,41 +580,75 @@
         </div>
       </div>
   </div>
+  <!-- Ikon Mute/Unmute -->
+  <div id="volume-control" title="Klik untuk mute/unmute">
+    <i class="fas fa-volume-up"></i>
+  </div>
 </div> <!-- Tutup container -->
 <script>
-  function openInvitation() {
-    document.getElementById('landing').classList.add('hidden');
-    const mainContent = document.getElementById('mainContent');
-    mainContent.classList.remove('hidden');
+  const sectionVideoPlayed = {}; // Untuk menandai apakah video di section sudah pernah diputar
 
-    setTimeout(() => {
-      new fullpage('#fullpage', {
-        autoScrolling: true,
-        fitToSection: true,
-        fitToSectionDelay: 500,
-        scrollBar: false,
-        navigation: false,
-        backgroundColor: 'transparent',
-        anchors: ['walimatul', 'ayat', 'profil', 'lokasi', 'kehadiran', 'hadiah'],
-        afterLoad: function(origin, destination, direction) {
-          // Putar video di section aktif
-          const currentVideo = destination.item.querySelector('video');
-          if (currentVideo) {
+function openInvitation() {
+  document.getElementById('landing').classList.add('hidden');
+  const mainContent = document.getElementById('mainContent');
+  mainContent.classList.remove('hidden');
+
+  const audio = document.getElementById('invitation-audio');
+  audio.muted = false; // Matikan mute saat tombol dibuka
+  audio.play();
+  const icon = document.querySelector('#volume-control i');
+
+  // Pastikan tidak mute saat pertama kali dimainkan
+  audio.muted = false;
+  icon.classList.remove('fa-volume-mute');
+  icon.classList.add('fa-volume-up');
+
+  audio.play().catch(err => {
+    console.error("Gagal memainkan audio:", err);
+  });
+
+  setTimeout(() => {
+    new fullpage('#fullpage', {
+      autoScrolling: true,
+      fitToSection: true,
+      fitToSectionDelay: 500,
+      scrollBar: false,
+      navigation: false,
+      backgroundColor: 'transparent',
+      anchors: ['walimatul', 'ayat', 'profil', 'lokasi', 'kehadiran', 'hadiah'],
+      afterLoad: function(origin, destination, direction) {
+        const currentSectionId = destination.item.getAttribute("data-anchor");
+        const currentVideo = destination.item.querySelector('video');
+        if (currentVideo) {
+          if (!sectionVideoPlayed[currentSectionId]) {
+            currentVideo.currentTime = 0;
             currentVideo.play();
-          }
-        },
-        onLeave: function(origin, destination, direction) {
-          // Pause video di section sebelumnya
-          const leavingVideo = origin.item.querySelector('video');
-          if (leavingVideo) {
-            leavingVideo.pause();
+            currentVideo.onended = () => {
+              currentVideo.pause();
+              currentVideo.currentTime = 0;
+            };
+            sectionVideoPlayed[currentSectionId] = true;
+          } else {
+            currentVideo.currentTime = 0;
+            currentVideo.play();
+            currentVideo.onended = () => {
+              currentVideo.pause();
+              currentVideo.currentTime = 0;
+            };
           }
         }
-      });
-
-      fullpage_api.moveTo('walimatul', 1);
-    }, 100);
-  }
+      },
+      onLeave: function(origin, destination, direction) {
+        const leavingVideo = origin.item.querySelector('video');
+        if (leavingVideo) {
+          leavingVideo.pause();
+          leavingVideo.currentTime = 0;
+        }
+      }
+    });
+    fullpage_api.moveTo('walimatul', 1);
+  }, 100);
+}
 
   // Countdown Timer
   const countDownDate = new Date("June 21, 2025 08:00:00").getTime();
@@ -631,6 +688,36 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.section').forEach(section => observer.observe(section));
+
+  currentVideo.onended = () => {
+  currentVideo.pause();
+  currentVideo.currentTime = 0;
+
+  // Hentikan animasi transformasi jika ada
+  const sectionContent = destination.item.querySelector('.additional-text');
+  if (sectionContent) {
+    sectionContent.style.transform = 'translateY(0)';
+  }
+};
+
+function toggleAudio() {
+  const audio = document.getElementById('invitation-audio');
+  const icon = document.querySelector('#volume-control i');
+  
+  if (audio.muted) {
+    audio.muted = false;
+    icon.classList.remove('fa-volume-mute');
+    icon.classList.add('fa-volume-up');
+  } else {
+    audio.muted = true;
+    icon.classList.remove('fa-volume-up');
+    icon.classList.add('fa-volume-mute');
+  }
+}
 </script>
+<div id="volume-control" title="Klik untuk mute/unmute" onclick="toggleAudio()">
+  <i class="fas fa-volume-up"></i>
+</div>
+<audio id="invitation-audio" src="hiya zaujati.mp3" loop></audio>
 </body>
 </html>
