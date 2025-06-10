@@ -524,19 +524,19 @@
       <!-- Section 1 -->
       <div class="section" data-anchor="walimatul">
         <div class="invitation-box">
-          <video src="aa.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="aa.mp4" class="fade-in-image" autoplay muted playsinline loop style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 2 -->
       <div class="section">
         <div class="verse-box fadeIn">
-          <video src="bb.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="bb.mp4" class="fade-in-image" autoplay muted playsinline loop style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 3 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="cc.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="cc.mp4" class="fade-in-image" autoplay muted playsinline loop style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
         <div id="countdown-container">
           <div>Acara Dimulai: <br>
@@ -550,19 +550,19 @@
       <!-- Section 3-1 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="cc1.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="cc1.mp4" class="fade-in-image" autoplay muted playsinline loop style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 3-2 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="cc2.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="cc2.mp4" class="fade-in-image" autoplay muted playsinline loop style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
       </div>
       <!-- Section 4 -->
       <div class="section">
         <div class="invitation-box">
-          <video src="dd.mp4" class="fade-in-image" autoplay muted playsinline style="width:100%; max-width:400px; border-radius:10px;"></video>
+          <video src="dd.mp4" class="fade-in-image" autoplay muted playsinline loop style="width:100%; max-width:400px; border-radius:10px;"></video>
         </div>
           <a href="https://maps.app.goo.gl/KBmvjHVHysRFZjkm9"  target="_blank" id="location-button" class="countdown-container">
             <span>Klik untuk Lihat Lokasi</span>
@@ -606,6 +606,18 @@ function openInvitation() {
   audio.play().catch(err => {
     console.error("Gagal memainkan audio:", err);
   });
+
+  // Fungsi untuk mengelola pemutaran video
+function handleVideoPlayback(video) {
+  // Memastikan video dimainkan ulang secara otomatis
+  video.loop = true;
+
+  // Event listener untuk ketika video selesai
+  video.addEventListener('ended', function () {
+    this.currentTime = 0; // Kembali ke awal video
+    this.play(); // Mainkan ulang video
+  });
+}
 
   setTimeout(() => {
     new fullpage('#fullpage', {
@@ -714,6 +726,8 @@ function toggleAudio() {
     icon.classList.add('fa-volume-mute');
   }
 }
+
+
 </script>
 <div id="volume-control" title="Klik untuk mute/unmute" onclick="toggleAudio()">
   <i class="fas fa-volume-up"></i>
